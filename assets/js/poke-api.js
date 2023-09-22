@@ -3,6 +3,9 @@ const pokeApi = {}
 
 function convertPokeApiDetailToPokemon(pokeDetail){
     const pokemon = new Pokemon()
+
+    // Dados do pokemon
+
     pokemon.number = pokeDetail.id
     pokemon.name = pokeDetail.name
     
@@ -13,6 +16,17 @@ function convertPokeApiDetailToPokemon(pokeDetail){
     pokemon.type = type
 
     pokemon.photo = pokeDetail.sprites.other.home.front_default
+    
+    // status do pokemon
+
+    pokemon.height = pokeDetail.height/10
+    pokemon.weight = pokeDetail.weight/10
+    pokemon.abilities = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name)
+    pokemon.stats = pokeDetail.stats.map((statsSlot) => {
+        let status = {}   
+        status[statsSlot.stat.name] = statsSlot.base_stat
+        return status
+    })
 
     return pokemon
 }
