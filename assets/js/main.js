@@ -2,6 +2,7 @@ const pokemonList = document.getElementById('pokemonsList')
 const loadMoreButton = document.getElementById('loadMoreButton')
 const sobreButton = document.getElementById('sobreButton')
 const statusButton = document.getElementById('statusButton')
+const taBugado = document.getElementById('taBugado')
 const pokemonInfos = document.getElementById('pokemonInfos')
 const limit = 9
 const maxPokemons = 151
@@ -30,42 +31,35 @@ function loadPokemonItens(offset, limit) {
                         Status
                     </button>
                         <table class="info ${pokemon.type}">
-                            <tr>
-                                <th class="indice"> Tamanho </th>
-                                <th class="valor"> ${pokemon.height} cm </th>
-                            </tr>
-                            <tr>
-                                <th class="indice"> Peso </th>
-                                <th class="valor"> ${pokemon.weight} kg </th>
-                            </tr>
-                            <tr>
-                                <th class="indice"> Habilidades </th>
-                                ${pokemon.abilities.map((ability) => `<th class="valor">${ability}</th>`).join('')}
-                            </tr>
+                            ${pokemon.stats.map((stats) => `
+                                <tr>
+                                    <th class="indice"> ${Object.keys(stats)} </th>
+                                    <th class="valor"> ${stats[Object.keys(stats)]}</th>
+                                </tr>
+                            `).join('')}
                         </table>
                 </div>
             </li>
         `).join('')
                     
-    pokemonList.innerHTML += newHtml 
+    pokemonList.innerHTML += newHtml
     })
 }
             
-function loadPokemonInfos() {
+// function loadPokemonInfos() {
                 
-}
+// }
             
 loadPokemonItens(offset, limit)
             
 loadMoreButton.addEventListener('click', () =>{
-                
     offset += limit
                 
     const qtdPokemonsProxPag = offset + limit
     
     if (qtdPokemonsProxPag >= maxPokemons) {
         
-        const novoLimite = maxPokemons - offset        
+        const novoLimite = maxPokemons - offset
         loadPokemonItens(offset, novoLimite)
         loadMoreButton.parentElement.removeChild(loadMoreButton)
         
@@ -75,22 +69,19 @@ loadMoreButton.addEventListener('click', () =>{
     
 })
 
-// statusButton.addEventListener('click', () => {
-//     console.log('clicou')
-//         `
-//         <table class="info ${pokemon.type}">
-//             <tr>
-//                 <th class="indice"> Tamanho </th>
-//                 <th class="valor"> ${pokemon.height} cm </th>
-//             </tr>
-//             <tr>
-//                 <th class="indice"> Peso </th>
-//                 <th class="valor"> ${pokemon.weight} kg </th>
-//             </tr>
-//             <tr>
-//                 <th class="indice"> Habilidades </th>
-//                 ${pokemon.abilities.map((ability) => `<th class="valor">${ability}</th>`).join('')}
-//             </tr>
-//     </table>
-//     `
-// })
+statusButton.addEventListener('click', () => alert('clicou'))
+
+
+
+{/* <tr>
+    <th class="indice"> Tamanho </th>
+    <th class="valor"> ${pokemon.height} m </th>
+</tr>
+<tr>
+    <th class="indice"> Peso </th>
+    <th class="valor"> ${pokemon.weight} kg </th>
+</tr>
+<tr>
+    <th class="indice"> Habilidades </th>
+    ${pokemon.abilities.map((ability) => `<th class="valor">${ability}</th>`).join('')}
+</tr> */}

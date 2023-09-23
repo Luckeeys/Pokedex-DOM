@@ -12,11 +12,12 @@ body{
     height: 100%;
     padding: 1rem;
     background-color: #8f8f8f;
+    align-content: center;
 }
 
 @media screen and (min-width: 992px) {
     .content {
-        max-width: 992px;
+        max-width: 1200px;
         max-height: auto;
         margin: 1rem auto;
         border-radius: 1rem;
@@ -29,6 +30,7 @@ body{
     list-style: none;
     padding: 0;
     margin: 0;
+    /* place-items: center; */
 }
 
 @media screen and (min-width: 425px) {
@@ -42,4 +44,3 @@ body{
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
-
