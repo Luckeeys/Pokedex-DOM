@@ -30,14 +30,14 @@ function loadPokemonItens(offset, limit) {
                     <button type="button" id="statusButton" class="botoesCartilhas ${pokemon.type}">
                         Status
                     </button>
-                        <table class="info ${pokemon.type}">
-                            ${pokemon.stats.map((stats) => `
-                                <tr>
-                                    <th class="indice"> ${Object.keys(stats)} </th>
-                                    <th class="valor"> ${stats[Object.keys(stats)]}</th>
-                                </tr>
-                            `).join('')}
-                        </table>
+                    <table class="info ${pokemon.type}">
+                        ${pokemon.stats.map((stats) => `
+                            <tr>
+                                <th class="indice"> ${Object.keys(stats)} </th>
+                                <th class="valor"> ${stats[Object.keys(stats)]}</th>
+                            </tr>
+                        `).join('')}
+                    </table>
                 </div>
             </li>
         `).join('')
