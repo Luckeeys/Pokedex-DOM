@@ -2,7 +2,6 @@ const pokemonList = document.getElementById('pokemonsList')
 const loadMoreButton = document.getElementById('loadMoreButton')
 const sobreButton = document.getElementById('sobreButton')
 const statusButton = document.getElementById('statusButton')
-const taBugado = document.getElementById('taBugado')
 const pokemonInfos = document.getElementById('pokemonInfos')
 const limit = 9
 const maxPokemons = 151
@@ -10,37 +9,20 @@ let offset = 0
 
 function loadPokemonItens(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-        
         const newHtml = pokemons.map((pokemon) => `
-            <li class="pokemon ${pokemon.type}">
-                <span class="number">'${pokemon.number}'</span>
-                <span class="name">${pokemon.name}</span>
-                
-                <div class="detail">
-                    <ol class="types">
-                        ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
-                    </ol>
-                    
-                    <img src=${pokemon.photo} alt="${pokemon.name}">
-                </div> 
-                <div id="pokemonInfos">
-                    <button type="button" id="sobreButton" class="botoesCartilhas ${pokemon.type}">
-                        Sobre
-                    </button> 
-                    <button type="button" id="statusButton" class="botoesCartilhas ${pokemon.type}">
-                        Status
-                    </button>
-                    <table class="info ${pokemon.type}">
-                        ${pokemon.stats.map((stats) => `
-                            <tr>
-                                <th class="indice"> ${Object.keys(stats)} </th>
-                                <th class="valor"> ${stats[Object.keys(stats)]}</th>
-                            </tr>
-                        `).join('')}
-                    </table>
-                </div>
-            </li>
-        `).join('')
+            <card-pokemon
+            Tipo=${pokemon.type}
+            Nome=${pokemon.name}
+            Numero=${pokemon.number}
+            Tipos=${pokemon.types}
+            Foto=${pokemon.photo}
+            Tamanho=${pokemon.height}
+            Peso=${pokemon.weight}
+            Habilidades=${pokemon.abilities}
+            StatusNome=${pokemon.stats.map((stats) => Object.keys(stats))}
+            StatusValor=${pokemon.stats.map((stats) => stats[Object.keys(stats)])}
+            ></card-pokemon>
+        `).join('');
                     
     pokemonList.innerHTML += newHtml
     })
@@ -69,7 +51,7 @@ loadMoreButton.addEventListener('click', () =>{
     
 })
 
-statusButton.addEventListener('click', () => alert('clicou'))
+// statusButton.addEventListener('click', () => alert('clicou'))
 
 
 

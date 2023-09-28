@@ -8,13 +8,26 @@ class CardPokemon extends HTMLElement {
     }
 
     build() {
+        const tipo = this.getAttribute('Tipo');
+        const nome = this.getAttribute('Nome');
+        const numero = this.getAttribute('Numero');
+        const tipos = this.getAttribute('Tipos').split(',');
+        const foto = this.getAttribute('Foto');
+        const tamanho = this.getAttribute('Tamanho');
+        const peso = this.getAttribute('Peso');
+        const habilidades = this.getAttribute('Habilidades');
+        const nomeStatus = this.getAttribute('StatusNome').split(',');
+        const valorStatus = this.getAttribute('StatusValor').split(',');
+
         const componentRoot = document.createElement('li');
-        componentRoot.setAttribute('class', 'pokemon');
+        componentRoot.setAttribute('class', `pokemon ${tipo}`);
 
         const numeroPokemon = document.createElement('span');
         numeroPokemon.setAttribute('class', 'number');
+        numeroPokemon.innerText = numero;
         const nomePokemon = document.createElement('span');
         nomePokemon.setAttribute('class', 'name');
+        nomePokemon.innerText = nome;
         
         componentRoot.appendChild(numeroPokemon);
         componentRoot.appendChild(nomePokemon);
@@ -23,12 +36,26 @@ class CardPokemon extends HTMLElement {
         detalhesPokemon.setAttribute('class', 'detail');      
         const listaTiposPokemons = document.createElement('ol');
         listaTiposPokemons.setAttribute('class', 'types');
-        const tiposPokemons = document.createElement('li');
-        tiposPokemons.setAttribute('class', 'type');
-        listaTiposPokemons.appendChild(tiposPokemons);
+        if (tipos.length > 1) {
+            const tiposPokemons1 = document.createElement('li');
+            tiposPokemons1.setAttribute('class', `type ${tipos[0]}`);
+            tiposPokemons1.innerText = `${tipos[0]}`;
+            const tiposPokemons2 = document.createElement('li');
+            tiposPokemons2.setAttribute('class', `type ${tipos[1]}`);
+            tiposPokemons2.innerText = `${tipos[1]}`;
+
+            listaTiposPokemons.appendChild(tiposPokemons1);
+            listaTiposPokemons.appendChild(tiposPokemons2);
+        } else {
+            const tiposPokemons1 = document.createElement('li');
+            tiposPokemons1.setAttribute('class', `type ${tipos[0]}`);
+            tiposPokemons1.innerText = `${tipos[0]}`;
+
+            listaTiposPokemons.appendChild(tiposPokemons1);
+        }
         const photoPokemon = document.createElement('img');
-        photoPokemon.src = 'photo.jpg';
-        photoPokemon.alt = 'foto do pokemon';
+        photoPokemon.src = foto;
+        photoPokemon.alt = nome;
         detalhesPokemon.appendChild(listaTiposPokemons);
         detalhesPokemon.appendChild(photoPokemon);
         
@@ -38,34 +65,37 @@ class CardPokemon extends HTMLElement {
         infoPokemons.setAttribute('id', 'pokemonInfos');
 
         const botaoSobre = document.createElement('button');
-        botaoSobre.setAttribute('class', 'botoesCartilhas');
+        botaoSobre.setAttribute('class', `botoesCartilhas ${tipo}`);
         botaoSobre.setAttribute('id', 'sobreButton');
         botaoSobre.setAttribute('type', 'button');
+        botaoSobre.innerText = 'Sobre';
         infoPokemons.appendChild(botaoSobre);
         
         const botaoStatus = document.createElement('button');
-        botaoStatus.setAttribute('class', 'botoesCartilhas');
+        botaoStatus.setAttribute('class', `botoesCartilhas ${tipo}`);
         botaoStatus.setAttribute('id', 'statusButton');
         botaoStatus.setAttribute('type', 'button');
+        botaoStatus.innerText = 'Status';
         infoPokemons.appendChild(botaoStatus);
 
         const tabelaStatus = document.createElement('table');
-        tabelaStatus.setAttribute('class', 'info');
+        tabelaStatus.setAttribute('class', `info ${tipo}`);
 
-        const status = document.createElement('tr');
+        for (let i = 0; i < nomeStatus.length; i++) {
+            const status = document.createElement('tr');
+            const statusIndice = document.createElement('th');
+            statusIndice.setAttribute('class', 'indice');
+            statusIndice.innerText = nomeStatus[i];
+            status.appendChild(statusIndice);
+            const statusNum = document.createElement('th');
+            statusNum.setAttribute('class', 'valor');
+            statusNum.innerText = valorStatus[i];
+            status.appendChild(statusNum);
+            tabelaStatus.appendChild(status);
+        }
 
-        const statusNome = document.createElement('th');
-        statusNome.setAttribute('class', 'indice');
-        status.appendChild(statusNome);
-        
-        const statusValor = document.createElement('th');
-        statusValor.setAttribute('class', 'valor');
-        status.appendChild(statusValor);
-
-        tabelaStatus.appendChild(status);
         infoPokemons.appendChild(tabelaStatus);
 
-        
         componentRoot.appendChild(infoPokemons);
 
         return componentRoot
@@ -196,25 +226,6 @@ class CardPokemon extends HTMLElement {
         .pokemon .detail img {
             max-height: 100%;
             max-width: 70px;
-        }
-        
-        .pagination {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 1rem;
-        }
-        
-        .pagination button {
-            padding: 0.25rem 0.5rem;
-            margin: 0.25rem 0;
-            font-size: .625rem;
-            color: #fff;
-            background-color: #31323d;
-            border: none;
-            border-radius: 1rem;
         }
         
         .info {
