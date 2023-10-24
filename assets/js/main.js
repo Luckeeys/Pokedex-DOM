@@ -27,11 +27,7 @@ function loadPokemonItens(offset, limit) {
     pokemonList.innerHTML += newHtml
     })
 }
-            
-// function loadPokemonInfos() {
-                
-// }
-            
+                        
 loadPokemonItens(offset, limit)
             
 loadMoreButton.addEventListener('click', () =>{

@@ -56,6 +56,8 @@ class CardPokemon extends HTMLElement {
         const photoPokemon = document.createElement('img');
         photoPokemon.src = foto;
         photoPokemon.alt = nome;
+        photoPokemon.width = "70"
+        photoPokemon.height = "70"
         detalhesPokemon.appendChild(listaTiposPokemons);
         detalhesPokemon.appendChild(photoPokemon);
         
@@ -195,7 +197,6 @@ class CardPokemon extends HTMLElement {
         
         .pokemon .number {
             color: #000;
-            opacity: .3;
             text-align: right;
             font-size: .625rem;
         }
@@ -223,6 +224,7 @@ class CardPokemon extends HTMLElement {
             text-align: center;
             border-color: #000;
             border-style: ridge;
+            width: 47px;
         }
         
         .pokemon .detail img {
