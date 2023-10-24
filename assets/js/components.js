@@ -221,6 +221,8 @@ class CardPokemon extends HTMLElement {
             border-radius: 1rem;
             filter: brightness(1.1);
             text-align: center;
+            border-color: #000;
+            border-style: ridge;
         }
         
         .pokemon .detail img {
