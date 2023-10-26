@@ -44,7 +44,7 @@ body{
     place-items: center;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 420px) {
     .pokemons {
         grid-template-columns: 1fr 1fr;
     }
